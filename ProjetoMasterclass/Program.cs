@@ -1,4 +1,6 @@
-﻿namespace ProjetoMasterclass
+﻿using System.Runtime.Intrinsics.X86;
+
+namespace ProjetoMasterclass
 {
     public class Program
     {
@@ -8,8 +10,9 @@
         {
             PopularLista();
             //ConsultarPosicao(3);
-            //ConsultarConteudoStrUsingWhileAndContains("Mat");
-            ConsultarConteudoStrUsingForAndIndexOf("ian");
+            ConsultarConteudoStrUsingWhileAndContains("Mat");
+            //ConsultarConteudoStrUsingForAndIndexOf("ian");
+            //ConsultarId(5);
 
             Console.ReadLine();
         }
@@ -73,6 +76,8 @@
                 aux = aux.Proximo;
                 posicao++;
             }
+
+            Console.WriteLine("Consulta por conteudo finalizada");
         }
 
         private static void ConsultarConteudoStrUsingForAndIndexOf(String conteudo)
@@ -87,17 +92,31 @@
                     Console.WriteLine();
                 }
             }
+
+            Console.WriteLine("Consulta por conteudo finalizada");
         }
 
         private static void ConsultarId(int id)
         {
-            Noh aux = null;
-            int posicao = 1;
+            Noh aux = listaNoh[0];
+            bool encontrou = false;
 
             do
             {
+                if (aux.Id == id)
+                {
+                    encontrou = true;
+                }
+                aux = aux.Proximo;
+            } while (aux != null && encontrou == false);
 
-            } while (null == null);
+            if (encontrou)
+            {
+                Console.WriteLine($"O item do id {id} tem o nome {aux.Nome}");
+            } else
+            {
+                Console.WriteLine($"Deu ruim tiu");
+            }
         }
     }
 }
